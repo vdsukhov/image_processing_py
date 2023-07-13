@@ -1,1 +1,2 @@
-print("Hello From Poetry Pacakge")
+def tmp_function():
+    print("Hello From Poetry Pacakge")

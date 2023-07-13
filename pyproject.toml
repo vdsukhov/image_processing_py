@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "image-processing-py"
+version = "0.1.0"
+description = ""
+authors = ["Vladimir Sukhov <vdsukhov@ya.ru>"]
+readme = "README.md"
+packages = [{include = "image_processing_py"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "image_processing_py"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 pyvips = "^2.2.1"
 numpy = "^1.23.5"
 ome-types = "^0.3.3"

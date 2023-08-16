@@ -9,9 +9,9 @@ packages = [{include = "image_processing_py"}]
 [tool.poetry.dependencies]
 python = "^3.8"
 pyvips = "^2.2.1"
-numpy = "^1.23.5"
-ome-types = "^0.3.3"
-scikit-image = "^0.19.3"
+numpy = "^1.22.1"
+ome-types = "^0.4"
+scikit-image = "^0.19.2"
 
 
 

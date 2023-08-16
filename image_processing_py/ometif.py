@@ -42,7 +42,7 @@ def generate_ome(c, w, h, names, dtype, colors=COLORS, pixel_physical_size=1.0):
     """
     ome_xml = OME()
     colors_2_use = [Color("white")]
-    colors_2_use.extend([COLORS[1 + (i % (len(COLORS) - 1))] for i in range(c)])
+    colors_2_use.extend([COLORS[1 + (i % (len(COLORS) - 1))] for i in range(c - 1)])
     # colors_2_use = [COLORS[0]] + 
     
     meta = Image(
@@ -94,7 +94,7 @@ def compress_to_8bit(images, q=0.999):
     Compress 16-bit images to 8-bit
     
     Parameters:
-    - images (numpy array): stack of numpy images (colors, height, width)
+    - images (numpy ndarray): stack of numpy images (colors, height, width)
     - qval (float): probability for the quantile to compute
     
     Returns:

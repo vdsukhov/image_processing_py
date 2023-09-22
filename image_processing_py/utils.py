@@ -1,4 +1,9 @@
 import re
+import rasterio.features
+import numpy as np
+
+from rasterio.transform import Affine
+
 
 def convert_win_path_to_linux(path):
     """
@@ -18,3 +23,58 @@ def convert_win_path_to_linux(path):
 
     return f"{prefix}{suffix}"
 
+
+# next function taken from here:
+# https://gist.github.com/petebankhead/77782fd6d684e18efb2447980fdfbb90
+def labels_to_features(lab: np.ndarray, object_type='annotation', connectivity: int=4, 
+                      transform: Affine=None, mask=None, downsample: float=1.0, include_labels=False,
+                      classification=None):
+    """
+    Create a GeoJSON FeatureCollection from a labeled image
+    
+    Parameters:
+    - lab: labeled image
+    - object_type (str): property object type
+    - connectivity (int): Use 4 or 8 pixel connectivity for grouping pixels into features
+    - transform (Affine): Affine transformation optional
+    - mask (bool): bool mask 
+    - downsample (float): scale factor to scale coordinates
+    - include_labels (bool): should labeles be included
+    - classification (str): properties classification type?
+    """
+    
+    """
+    Create a GeoJSON FeatureCollection from a labeled image.
+    """
+    features = []
+    
+    # Ensure types are valid
+    if lab.dtype == bool:
+        mask = lab
+        lab = lab.astype(np.uint8)
+    else:
+        mask = lab > 0
+    
+    # Create transform from downsample if needed
+    if transform is None:
+        transform = Affine.scale(downsample)
+    
+    # Trace geometries
+    for s in rasterio.features.shapes(lab, mask=mask, 
+                                      connectivity=connectivity, transform=transform):
+
+        # Create properties
+        props = dict(object_type=object_type)
+        if include_labels:
+            props['measurements'] = [{'name': 'Label', 'value': s[1]}]
+            
+        # Just to show how a classification can be added
+        if classification is not None:
+            props['classification'] = classification
+        
+        # Wrap in a dict to effectively create a GeoJSON Feature
+        po = dict(type="Feature", geometry=s[0], properties=props)
+
+        features.append(po)
+    
+    return features

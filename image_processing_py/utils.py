@@ -31,6 +31,7 @@ def labels_to_features(lab: np.ndarray, object_type='annotation', connectivity: 
                       classification=None):
     """
     Create a GeoJSON FeatureCollection from a labeled image
+    Function originally taken from here: https://gist.github.com/petebankhead/77782fd6d684e18efb2447980fdfbb90
     
     Parameters:
     - lab: labeled image
@@ -41,10 +42,9 @@ def labels_to_features(lab: np.ndarray, object_type='annotation', connectivity: 
     - downsample (float): scale factor to scale coordinates
     - include_labels (bool): should labeles be included
     - classification (str): properties classification type?
-    """
     
-    """
-    Create a GeoJSON FeatureCollection from a labeled image.
+    Returns:
+    (list): list with features in form of dictionaries
     """
     features = []
     

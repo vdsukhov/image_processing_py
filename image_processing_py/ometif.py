@@ -29,16 +29,16 @@ def generate_ome(c, w, h, names, dtype, colors=COLORS, pixel_physical_size=1.0):
     Function generate ome xml meta information
     
     Parameters:
-    - c (int): The number of channels
-    - w (int): Image width
-    - h (int): Image height
-    - names (list): List of channel names
-    - dtype (str): Images dtype
-    - colors (list): List of ome_types.model.simple_types.Color colors
-    - pixel_physical_size (float): Pixel size in um
+        - c (int): The number of channels
+        - w (int): Image width
+        - h (int): Image height
+        - names (list): List of channel names
+        - dtype (str): Images dtype
+        - colors (list): List of ome_types.model.simple_types.Color colors
+        - pixel_physical_size (float): Pixel size in um
     
     Returns:
-    ome_types.model.OME: Composed ome xml for given parameters
+        ome_types.model.OME: Composed ome xml for given parameters
     """
     ome_xml = OME()
     colors_2_use = [Color("white")]
@@ -67,13 +67,13 @@ def generate_pyvips_images(images, names, colors=COLORS, pixel_physical_size=1.0
     Generates pyvips images from stack of numpy arrays
     
     Parameters:
-    - images (numpy array): stack of numpy images (colors, height, width)
-    - names (list): list of channel names
-    - colors (list): List of ome_types.model.simple_types.Color colors
-    - pixel_physical_size (float): Pixel size in um
+        - images (numpy array): stack of numpy images (colors, height, width)
+        - names (list): list of channel names
+        - colors (list): List of ome_types.model.simple_types.Color colors
+        - pixel_physical_size (float): Pixel size in um
     
     Returns:
-    pyvips.Image
+        pyvips.Image
     """
     c, h, w = images.shape
     ome_xml = generate_ome(c, w, h, names, str(images.dtype), colors, pixel_physical_size)
@@ -94,11 +94,11 @@ def compress_to_8bit(images, q=0.999):
     Compress 16-bit images to 8-bit
     
     Parameters:
-    - images (numpy ndarray): stack of numpy images (colors, height, width)
-    - qval (float): probability for the quantile to compute
+        - images (numpy ndarray): stack of numpy images (colors, height, width)
+        - qval (float): probability for the quantile to compute
     
     Returns:
-    numpy array of 8-bit images
+        numpy array of 8-bit images
     """
     res = []
     for img in images:

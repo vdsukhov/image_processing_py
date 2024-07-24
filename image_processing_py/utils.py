@@ -107,7 +107,7 @@ def geojson_to_tiff(gdf: gpd.GeoDataFrame, shape: Union[tuple, list, np.ndarray]
     assert np.all([elem.geom_type == "Polygon" for elem in gdf['geometry']]), \
         "Currently, only polygons are supported as geometries for converting into images."
     
-    for i, geom in tqdm.tqmd(enumerate(gdf['geometry'])):
+    for i, geom in tqdm.tqdm(enumerate(gdf['geometry'])):
         coords = np.array(geom.exterior.coords[:-1])
         pxx, pyy = polygon(coords[:, 1], coords[:, 0], labels.shape)
         labels[pxx, pyy] = i + 1

@@ -24,7 +24,8 @@ COLORS = (
     Color("white"), Color("red"), Color("lime"), Color("blue"), Color("magenta"), Color("cyan"), Color("yellow")
 )
 
-def generate_ome(c, w, h, names, dtype, colors=COLORS, pixel_physical_size=1.0):
+def generate_ome(c: int, w: int, h: int, names: list[str], dtype: str, 
+                 colors: list[Color]=COLORS, pixel_physical_size: float=1.0) -> OME:
     """
     Function generate ome xml meta information
     
@@ -42,8 +43,7 @@ def generate_ome(c, w, h, names, dtype, colors=COLORS, pixel_physical_size=1.0):
     """
     ome_xml = OME()
     colors_2_use = [Color("white")]
-    colors_2_use.extend([COLORS[1 + (i % (len(COLORS) - 1))] for i in range(c - 1)])
-    # colors_2_use = [COLORS[0]] + 
+    colors_2_use.extend([colors[1 + (i % (len(colors) - 1))] for i in range(c - 1)])
     
     meta = Image(
         id="Image:0",
@@ -62,7 +62,8 @@ def generate_ome(c, w, h, names, dtype, colors=COLORS, pixel_physical_size=1.0):
     return(ome_xml)
 
 
-def generate_pyvips_images(images, names, colors=COLORS, pixel_physical_size=1.0):
+def generate_pyvips_images(images: np.ndarray, names: list[str], 
+                           colors: list[Color]=COLORS, pixel_physical_size: float=1.0) -> pyvips.Image:
     """
     Generates pyvips images from stack of numpy arrays
     
@@ -89,7 +90,7 @@ def generate_pyvips_images(images, names, colors=COLORS, pixel_physical_size=1.0
     return(res)
 
 
-def compress_to_8bit(images, q=0.999):
+def compress_to_8bit(images: np.ndarray, q: float=0.999) -> np.ndarray:
     """
     Compress 16-bit images to 8-bit
     

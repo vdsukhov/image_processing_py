@@ -9,7 +9,7 @@ from typing import Union
 from skimage.draw import polygon
 
 
-def convert_win_path_to_linux(path):
+def convert_win_path_to_linux(path: str) -> str:
     """
     Function converts the windows path to wsl linux path
     
@@ -30,9 +30,9 @@ def convert_win_path_to_linux(path):
 
 # next function taken from here:
 # https://gist.github.com/petebankhead/77782fd6d684e18efb2447980fdfbb90
-def labels_to_features(lab: np.ndarray, object_type='annotation', connectivity: int=4, 
-                      transform: Affine=None, mask=None, downsample: float=1.0, include_labels=False,
-                      classification=None):
+def labels_to_features(lab: np.ndarray, object_type: str='annotation', connectivity: int=4, 
+                      transform: Affine=None, mask=None, downsample: float=1.0, 
+                      include_labels: bool=False, classification: None=None) -> list:
     """
     Create a GeoJSON FeatureCollection from a labeled image
     Function originally taken from here: https://gist.github.com/petebankhead/77782fd6d684e18efb2447980fdfbb90
@@ -84,7 +84,9 @@ def labels_to_features(lab: np.ndarray, object_type='annotation', connectivity: 
     return features
 
 
-def geojson_to_tiff(gdf: gpd.GeoDataFrame, shape: Union[tuple, list, np.ndarray], dtype: np.dtype = np.int32) -> np.ndarray:
+def geojson_to_tiff(gdf: gpd.GeoDataFrame, 
+                    shape: Union[tuple, list, np.ndarray], 
+                    dtype: np.dtype = np.int32) -> np.ndarray:
     """
     Converts a GeoDataFrame containing polygons into a labeled image (numpy array).
 

@@ -2,7 +2,7 @@ import numpy as np
 import mahotas as mh
 import tqdm
 
-def edof(imgs):
+def edof(imgs: np.ndarray) -> np.ndarray:
     """
     Performs extended depth of focus (edof)
     

@@ -102,7 +102,7 @@ def geojson_to_tiff(gdf: gpd.GeoDataFrame,
         AssertionError: If any geometry in gdf is not a Polygon.
 
     Notes:
-        - Currently, only polygons are supported as geometries for converting into images.
+        - Currently, only polygons and mutli-polygons are supported as geometries for converting into images.
     """
     labels = np.zeros(shape, dtype=dtype)
     

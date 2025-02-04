@@ -77,7 +77,7 @@ def generate_pyvips_images(images: np.ndarray, names: list[str],
         pyvips.Image
     """
     c, h, w = images.shape
-    ome_xml = generate_ome(c, w, h, names, str(images.dtype), colors, pixel_physical_size)
+    ome_xml = generate_ome(c, w, h, names, DTYPE_TO_FORMAT[str(images.dtype)], colors, pixel_physical_size)
     # ome_xml = generate_ome(c, w, h, names, colors, str(images.dtype), pixel_physical_size=pixel_physical_size)
     
     res = np.transpose(images, axes=[1, 2, 0])
